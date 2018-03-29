@@ -18,7 +18,7 @@ public class Event {
     private Boolean mIsNordEvent;
 
     public Event() {
-        mDate = new Date();
+
     }
 
     public String getId() {

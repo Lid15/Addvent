@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,8 +22,7 @@ import java.util.List;
  * Created by Ólafur Georg Gylfason (ogg4@hi.is) on 13.3.2018.
  *
  * This fragment displays the recyclerview that contains
- * all of the events associated with Nörd plus the ones
- * that are not associated with Nörd.
+ * all of the events that are marked with filled star
  */
 
 public class Tab3Fragment extends Fragment {
@@ -33,8 +34,8 @@ public class Tab3Fragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
         new FetchItemsTask().execute();
+
     }
 
     @Nullable
@@ -47,6 +48,7 @@ public class Tab3Fragment extends Fragment {
         mEventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         setupAdapter();
+
 
         return view;
     }
@@ -64,6 +66,9 @@ public class Tab3Fragment extends Fragment {
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private ImageView mIconImageView;
+        private CheckBox mStarCheckBox;
+
+        EventLab mEventLab = EventLab.get(getActivity());
 
         public EventHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_event, parent, false));
@@ -72,6 +77,18 @@ public class Tab3Fragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.event_title);
             mDateTextView = (TextView) itemView.findViewById(R.id.event_date);
             mIconImageView = (ImageView) itemView.findViewById(R.id.event_icon);
+            mStarCheckBox = (CheckBox) itemView.findViewById(R.id.event_starCheckBox);
+
+            mStarCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        mEventLab.addEventId(mEvent.getId());
+                    } else {
+                        mEventLab.deleteEventId(mEvent.getId());
+                    }
+                }
+            });
         }
 
         public void bind(Event event) {
@@ -79,6 +96,7 @@ public class Tab3Fragment extends Fragment {
             mTitleTextView.setText(mEvent.getTitle());
             mDateTextView.setText(mEvent.getDate().toString());
             mIconImageView.setVisibility(event.getNordEvent() ? View.VISIBLE : View.GONE);
+            mStarCheckBox.setChecked(mEventLab.isStarred(event.getId()));
         }
 
         @Override
@@ -94,9 +112,15 @@ public class Tab3Fragment extends Fragment {
     private class EventAdapter extends RecyclerView.Adapter<EventHolder> {
 
         private List<Event> mEventItems = new ArrayList<>();
+        EventLab mEventLab = EventLab.get(getActivity());
 
         public EventAdapter(List<Event> events) {
-            mEventItems = events;
+            for (Event event : events) {
+                //String id = event.getId();
+                if (mEventLab.isStarred(event.getId())) {
+                    mEventItems.add(event);
+                }
+            }
         }
 
         @Override
