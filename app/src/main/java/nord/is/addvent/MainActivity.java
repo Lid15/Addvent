@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: Starting.");
 
 
+
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter
@@ -39,13 +40,14 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
     }
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new Tab1Fragment(), "Nörd");
         adapter.addFragment(new Tab2Fragment(), "Aðrir");
-        adapter.addFragment(new Tab3Fragment(), "Allir");
+        adapter.addFragment(new Tab3Fragment(), "Mínir");
         viewPager.setAdapter(adapter);
     }
 }

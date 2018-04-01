@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -89,8 +92,17 @@ public class EventFetcher {
             event.setHost(eventJsonObject.getString("host"));
             event.setDescription(eventJsonObject.getString("description"));
 
-            String isEventByNord = eventJsonObject.getString("byNord");
+            String isEventByNord = eventJsonObject.getString("bynord");
             event.setNordEvent(Boolean.parseBoolean(isEventByNord));
+
+            String d = eventJsonObject.getString("time");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                Date date = format.parse(d);
+                event.setDate(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             items.add(event);
         }

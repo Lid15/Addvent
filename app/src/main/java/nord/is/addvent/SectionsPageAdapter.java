@@ -1,8 +1,10 @@
 package nord.is.addvent;
 
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.List;
  * all of them and their names by using Lists.
  */
 
-public class SectionsPageAdapter extends FragmentPagerAdapter {
+public class SectionsPageAdapter extends FragmentStatePagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
@@ -42,4 +44,5 @@ public class SectionsPageAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return mFragmentList.size();
     }
+
 }
