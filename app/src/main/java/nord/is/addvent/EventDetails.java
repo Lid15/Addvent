@@ -1,6 +1,7 @@
 package nord.is.addvent;
 
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,7 +24,7 @@ import android.widget.Toast;
  * Created by Ásgerður Inna Antonsdóttir and Hrafnfhildur Olga Hjaltadóttir on 3.4.2018.
  */
 
-public class EventDetails extends Fragment{
+public class EventDetails extends Activity{
     private Event mEvent;
     private TextView mTitleTextView;
     private TextView mDateTextView;
@@ -39,7 +40,7 @@ public class EventDetails extends Fragment{
         mEvent  = new Event();
     }
 
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_event_details, container, false);
