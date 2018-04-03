@@ -105,7 +105,7 @@ public class Tab3Fragment extends Fragment {
             //Toast.makeText(getActivity(),
              //       mEvent.getTitle() + " clicked!", Toast.LENGTH_SHORT)
              //       .show();
-            Intent intent = new Intent(getActivity(), mEvent.getId());
+            Intent intent = new Intent(getActivity(), EventDetails.class);
             startActivity(intent);
         }
     }
