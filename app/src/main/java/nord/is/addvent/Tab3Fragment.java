@@ -14,6 +14,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,11 +102,11 @@ public class Tab3Fragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(),
-                    mEvent.getTitle() + " clicked!", Toast.LENGTH_SHORT)
-                    .show();
-            //Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
-            //startActivity(intent);
+            //Toast.makeText(getActivity(),
+             //       mEvent.getTitle() + " clicked!", Toast.LENGTH_SHORT)
+             //       .show();
+            Intent intent = new Intent(getActivity(), mEvent.getId());
+            startActivity(intent);
         }
     }
 

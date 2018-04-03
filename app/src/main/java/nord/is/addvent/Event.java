@@ -9,13 +9,13 @@ import java.util.Date;
  */
 public class Event {
 
-    private String mId;
-    private String mTitle;
-    private String mLocation;
-    private String mHost;
-    private String mDescription;
-    private Date mDate;
-    private Boolean mIsNordEvent;
+    public String mId;
+    public String mTitle;
+    public String mLocation;
+    public String mHost;
+    public String mDescription;
+    public Date mDate;
+    public Boolean mIsNordEvent;
 
     public Event() {
 
