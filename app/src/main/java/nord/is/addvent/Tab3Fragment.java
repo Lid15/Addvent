@@ -15,9 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * Created by Ólafur Georg Gylfason (ogg4@hi.is) on 13.3.2018.
@@ -105,7 +108,8 @@ public class Tab3Fragment extends Fragment {
             //Toast.makeText(getActivity(),
              //       mEvent.getTitle() + " clicked!", Toast.LENGTH_SHORT)
              //       .show();
-            Intent intent = new Intent(getActivity(), EventDetails.class);
+            int mId = parseInt(mEvent.getId());
+            Intent intent = EventDetails.newIntent(getActivity(), mId);
             startActivity(intent);
         }
     }
